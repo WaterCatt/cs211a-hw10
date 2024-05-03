@@ -1,11 +1,11 @@
-﻿using static System.Math;
-
-namespace Homework10
+﻿namespace Homework10
 {
     internal class Tasks
     {
         static void Main()
         {
+            Protect_tasks.Protected_on();
+            Console.WriteLine("\n");
             var Rect_1 = new Rect(new Point(10, 0), new Point(10, 1), new Point(1, 0), new Point(1, 1));
             var Rect_2 = new Rect(new Point(-10, -5), new Point(-5, -5), new Point(-5, 5), new Point(-10, 5));
             var Rect_3 = new Rect(new Point(0, 0), new Point(1, 0), new Point(0, 1), new Point(1, 1));
