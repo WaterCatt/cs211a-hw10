@@ -40,6 +40,6 @@
         /// Возвращает строку с названием и правильным ответом формулы
         /// </summary>
         /// <returns></returns>
-        public override string ToString() => $"Формула {Name}: {Answer};";
+        public override string ToString() => $"Формула: {Name}, Ответ: {Answer};";
     }
 }
