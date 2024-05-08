@@ -13,3 +13,4 @@ D:\ЯП\HW10\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\refint\Homew
 D:\ЯП\HW10\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\Homework10.pdb
 D:\ЯП\HW10\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\Homework10.genruntimeconfig.cache
 D:\ЯП\HW10\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\ref\Homework10.dll
+D:\ЯП\HW10\cs211a-hw10\CSharpHomework\Homework10\bin\Debug\net8.0\Formulas.txt
