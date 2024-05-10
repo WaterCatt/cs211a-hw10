@@ -1,0 +1,16 @@
+E:\Учёба\CS\cs211a-hw10\CSharpHomework\Homework10\bin\Debug\net8.0\Homework10.exe
+E:\Учёба\CS\cs211a-hw10\CSharpHomework\Homework10\bin\Debug\net8.0\task2\Bank.txt
+E:\Учёба\CS\cs211a-hw10\CSharpHomework\Homework10\bin\Debug\net8.0\Homework10.deps.json
+E:\Учёба\CS\cs211a-hw10\CSharpHomework\Homework10\bin\Debug\net8.0\Homework10.runtimeconfig.json
+E:\Учёба\CS\cs211a-hw10\CSharpHomework\Homework10\bin\Debug\net8.0\Homework10.dll
+E:\Учёба\CS\cs211a-hw10\CSharpHomework\Homework10\bin\Debug\net8.0\Homework10.pdb
+E:\Учёба\CS\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\Homework10.GeneratedMSBuildEditorConfig.editorconfig
+E:\Учёба\CS\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\Homework10.AssemblyInfoInputs.cache
+E:\Учёба\CS\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\Homework10.AssemblyInfo.cs
+E:\Учёба\CS\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\Homework10.csproj.CoreCompileInputs.cache
+E:\Учёба\CS\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\Homework10.sourcelink.json
+E:\Учёба\CS\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\Homework10.dll
+E:\Учёба\CS\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\refint\Homework10.dll
+E:\Учёба\CS\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\Homework10.pdb
+E:\Учёба\CS\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\Homework10.genruntimeconfig.cache
+E:\Учёба\CS\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\ref\Homework10.dll
