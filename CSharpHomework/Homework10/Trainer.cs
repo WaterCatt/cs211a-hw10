@@ -9,6 +9,11 @@ namespace Homework10
     class Trainer
     {
         /// <summary>
+        /// Номер тренировки
+        /// </summary>
+        private static int Trainingnum = 0;
+
+        /// <summary>
         /// Банк формул
         /// </summary>
         private Dictionary<string, List<Formula>> FormulaBank = new Dictionary<string, List<Formula>>();
@@ -16,7 +21,7 @@ namespace Homework10
         /// <summary>
         /// Статистика ответов
         /// </summary>
-        private List<string> Statistics = new List<string>();
+        private Dictionary<int, List<(string, Formula)>> Statistics = new Dictionary<int, List<(string, Formula)>>();
 
         /// <summary>
         /// Конструктор тренажёра
@@ -26,15 +31,14 @@ namespace Homework10
         /// <summary>
         /// Добавляет одну формулу в банк формул в указанную тему
         /// </summary>
-        /// <param name="topic">Тема</param>
         /// <param name="formula">Формула</param>
-        public void AddFormula(string topic, Formula formula)
+        public void AddFormula(Formula formula)
         {
-            topic = topic.ToLower();
-            if (FormulaBank.ContainsKey(topic))
-                FormulaBank[topic].Add(formula);
+            var top = formula.Topic.ToLower();
+            if (FormulaBank.ContainsKey(top))
+                FormulaBank[top].Add(formula);
             else
-                FormulaBank.Add(topic, new List<Formula> { formula });
+                FormulaBank.Add(top, new List<Formula> { formula });
         }
 
         /// <summary>
@@ -64,16 +68,31 @@ namespace Homework10
             foreach (var s in File.ReadLines(filename).Skip(1))
             {
                 var form = s.Split(',', StringSplitOptions.RemoveEmptyEntries);
-                AddFormula(form[0], new Formula(form[1], form[2]));
+                AddFormula(new Formula(form[1], form[2], form[0]));
             }
         }
 
+        /// <summary>
+        /// Выводит статистику неправильных ответов по темам
+        /// </summary>
+        /// <param name="cnt">Количество учитываемых тренировок</param>
+        public void FalseStatisticPrint(int cnt)
+        {
+            if ((cnt < 0) || (cnt > Trainingnum))
+                throw new ArgumentException("Некорректное число учитываемых тренировок.");
+            WriteLine($"Статистика неправильных ответов по темам в {cnt} последних(-ней) тренировках(-ке):");
+            var cort = Statistics.TakeLast(cnt).SelectMany(kv => kv.Value).Where(sf => sf.Item1 == "Неправильный ответ");
+            foreach (var k in FormulaBank.Keys)
+                WriteLine($"Тема: {k}, кол-во неправильных ответов = {cort.Where(sf => sf.Item2.Topic.ToLower() == k).Count()}");
+        }
         /// <summary>
         /// Начинает тренировку
         /// </summary>
         public void StartTraining()
         {
             WriteLine("Здравствуйте!\n");
+            Trainingnum++;
+            Statistics.Add(Trainingnum, new List<(string, Formula)>());
             var r = new Random();
             var q = new Stack<Formula>();
             var tc = TopicChoice();
@@ -102,12 +121,12 @@ namespace Homework10
             WriteLine("Тренировка началась!");
             while (q.Count > 0)
             {
-                WriteLine("Следующая формула через 5 секунд. Готовьтесь!");
-                Thread.Sleep(5000);
+                WriteLine("Следующая формула через 3 секунды. Готовьтесь!");
+                Thread.Sleep(3000);
                 WriteLine();
                 WriteLine($"Формула: {q.Peek().Name};");
                 Write("Осталось времени: ");
-                for (int i = 10; i > 0; i--)
+                for (int i = 5; i > 0; i--)
                 {
                     Write($"{i} ");
                     Thread.Sleep(1000);
@@ -116,11 +135,15 @@ namespace Homework10
                 Write($"Ответ: {q.Peek().Answer}; Дали ли Вы правильный ответ? (Введите да или что-то другое, если нет): ");
                 if (ReadLine().ToLower() == "да")
                 {
+                    Statistics[Trainingnum].Add(($"Правильный ответ", q.Peek()));
                     q.Pop();
                     WriteLine("Молодец!");
                 }
                 else
+                {
+                    Statistics[Trainingnum].Add(($"Неправильный ответ", q.Peek()));
                     WriteLine("Жаль!");
+                }
                 WriteLine();
             }
             WriteLine("Вы - большой молодец!");

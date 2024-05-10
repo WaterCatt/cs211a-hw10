@@ -8,7 +8,7 @@
         /// <summary>
         /// Название формулы
         /// </summary>
-        private string name = "Default name";
+        private string name;
 
         /// <summary>
         /// Название формулы
@@ -18,7 +18,7 @@
         /// <summary>
         /// Правильный ответ
         /// </summary>
-        private string answer = "Default answer";
+        private string answer;
 
         /// <summary>
         /// Правильный ответ
@@ -26,20 +26,30 @@
         public string Answer { get => answer; set => answer = string.IsNullOrWhiteSpace(value) ? "Empty" : value; }
 
         /// <summary>
+        /// Тема
+        /// </summary>
+        private string topic;
+
+        /// <summary>
+        /// Тема
+        /// </summary>
+        public string Topic { get => topic; set => topic = string.IsNullOrWhiteSpace(value) ? "Empty" : value; }
+
+        /// <summary>
         /// Конструктор формулы
         /// </summary>
         /// <param name="name">Название формулы</param>
         /// <param name="answer">Правильный ответ</param>
-        public Formula(string name, string answer)
+        public Formula(string name, string answer, string topic)
         {
             this.name = name;
             this.answer = answer;
+            this.topic = topic;
         }
 
         /// <summary>
-        /// Возвращает строку с названием и правильным ответом формулы
+        /// Возвращает строку с темой, названием и правильным ответом формулы
         /// </summary>
-        /// <returns></returns>
-        public override string ToString() => $"Формула: {Name}, Ответ: {Answer};";
+        public override string ToString() => $"Тема: {Topic}, название: {Name}, ответ: {Answer}";
     }
 }
