@@ -67,7 +67,6 @@ namespace Homework10
         {
             double eps = 0.001;
 
-            bool allSidesAreStraight = true;
             for (int i = 0; i < arr_points.Length; i++)
             {
                 int j = (i + 1) % arr_points.Length;
@@ -108,21 +107,6 @@ namespace Homework10
                     (p1, p2) = (p2, p1);
             }
 
-            /*
-            p_center = new Point((p3.x + p1.x) / 2, (p3.y + p1.y) / 2);
-            
-            Point p_center_2 = new Point((p4.x + p2.x) / 2, (p4.y + p2.y) / 2);
-
-            if ((((p_center.x - p1.x) < eps) && ((p_center.y - p1.y) < eps)) ||
-                (((p_center_2.x - p2.x) < eps) && ((p_center_2.y - p2.y) < eps)) ||
-                (Abs(p_center.x - p_center_2.x) > eps) ||
-                (Abs(p_center.y - p_center_2.y) > eps) ||
-                ((Abs(p1.x - p2.x) > eps) && (Abs(p1.y - p2.y) > eps)) ||
-                ((Abs(p3.x - p2.x) > eps) && (Abs(p3.y - p2.y) > eps)) ||
-                ((Abs(p1.x - p4.x) > eps) && (Abs(p1.y - p4.y) > eps)) ||
-                ((Abs(p3.x - p4.x) > eps) && (Abs(p3.y - p4.y) > eps)))
-                throw new Exception("неверные координаты вершин");
-            */
             p_center = new Point((p3.x + p1.x) / 2, (p3.y + p1.y) / 2);
             this.p1 = p1;
             this.p2 = p2;
@@ -161,7 +145,7 @@ namespace Homework10
             var arr_p = new Point[] { p1, p2, p3, p4 };
             foreach (var p in arr_p)
             {
-                (p.x, p.y) = (p_center.x + (p.x - p_center.x) * scos - (p.y - p_center.y) * ssin, p_center.y + (p.y - p_center.y) * scos - (p.x - p_center.x) * ssin);
+                (p.x, p.y) = (p_center.x + (p.x - p_center.x) * scos - (p.y - p_center.y) * ssin, p_center.y + (p.y - p_center.y) * scos + (p.x - p_center.x) * ssin);
             }
         }
 
