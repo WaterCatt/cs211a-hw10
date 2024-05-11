@@ -1,10 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "E:\\\u0423\u0447\u0451\u0431\u0430\\CS\\cs211a-hw10\\CSharpHomework\\",
+  "WorkspaceRootPath": "C:\\Program C#\\labs\\Git\\cs211a-hw10\\CSharpHomework\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C2B9C38E-0109-4C51-963D-D9E8825DAEE1}|Homework10\\Homework10.csproj|e:\\\u0443\u0447\u0451\u0431\u0430\\cs\\cs211a-hw10\\csharphomework\\homework10\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C2B9C38E-0109-4C51-963D-D9E8825DAEE1}|Homework10\\Homework10.csproj|solutionrelative:homework10\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C2B9C38E-0109-4C51-963D-D9E8825DAEE1}|Homework10\\Homework10.csproj|c:\\program c#\\labs\\git\\cs211a-hw10\\csharphomework\\homework10\\task1\\task1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2B9C38E-0109-4C51-963D-D9E8825DAEE1}|Homework10\\Homework10.csproj|solutionrelative:homework10\\task1\\task1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2B9C38E-0109-4C51-963D-D9E8825DAEE1}|Homework10\\Homework10.csproj|c:\\program c#\\labs\\git\\cs211a-hw10\\csharphomework\\homework10\\tasks.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2B9C38E-0109-4C51-963D-D9E8825DAEE1}|Homework10\\Homework10.csproj|solutionrelative:homework10\\tasks.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,14 +23,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "E:\\\u0423\u0447\u0451\u0431\u0430\\CS\\cs211a-hw10\\CSharpHomework\\Homework10\\Program.cs",
-              "RelativeDocumentMoniker": "Homework10\\Program.cs",
-              "ToolTip": "E:\\\u0423\u0447\u0451\u0431\u0430\\CS\\cs211a-hw10\\CSharpHomework\\Homework10\\Program.cs",
-              "RelativeToolTip": "Homework10\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Title": "Task1.cs",
+              "DocumentMoniker": "C:\\Program C#\\labs\\Git\\cs211a-hw10\\CSharpHomework\\Homework10\\task1\\Task1.cs",
+              "RelativeDocumentMoniker": "Homework10\\task1\\Task1.cs",
+              "ToolTip": "C:\\Program C#\\labs\\Git\\cs211a-hw10\\CSharpHomework\\Homework10\\task1\\Task1.cs",
+              "RelativeToolTip": "Homework10\\task1\\Task1.cs",
+              "ViewState": "AQIAABoAAAAAAAAAAAAowCIAAAAVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-30T15:16:19.216Z",
+              "WhenOpened": "2024-05-11T18:36:21.351Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Tasks.cs",
+              "DocumentMoniker": "C:\\Program C#\\labs\\Git\\cs211a-hw10\\CSharpHomework\\Homework10\\Tasks.cs",
+              "RelativeDocumentMoniker": "Homework10\\Tasks.cs",
+              "ToolTip": "C:\\Program C#\\labs\\Git\\cs211a-hw10\\CSharpHomework\\Homework10\\Tasks.cs",
+              "RelativeToolTip": "Homework10\\Tasks.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAIwAkAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-02T11:31:26.227Z",
               "EditorCaption": ""
             }
           ]
