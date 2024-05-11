@@ -13,7 +13,8 @@ namespace Homework10
                 WriteLine("\nМодуль математика. Доступные команды (вызов по номеру):\n" +
                         "1. Геометрия\n" +
                         "2. Проверка знаний\n" +
-                        "3. Зазубривание теории\n\n");
+                        "3. Зазубривание теории\n" +
+                        "4. Выход\n\n");
                 Write("Введите команду: ");
                 var s = ReadLine();
                 if (string.IsNullOrWhiteSpace(s))
@@ -36,6 +37,10 @@ namespace Homework10
                 {
                     Console.Clear();
                     //task3
+                }
+                else if (s == "4")
+                {
+                    return;
                 }
                 else
                 {
