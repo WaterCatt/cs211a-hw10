@@ -36,7 +36,7 @@ namespace Homework10
                 else if (s == "3")
                 {
                     Console.Clear();
-                    //task3
+                    Task3();
                 }
                 else if (s == "4")
                 {
@@ -50,6 +50,9 @@ namespace Homework10
                 Console.Clear();
             }
 
+
+
+        }
             /// <summary>
             /// Метод вызова второго модуля
             /// </summary>
@@ -103,6 +106,14 @@ namespace Homework10
                     else WriteLine("Команда введена неверно! Попробуйте заново!");
                 }
             }
+
+        static void Task3()
+        {
+            var k = new Trainer();
+            k.LoadFromFile("Formulas.txt");
+            k.StartTraining();
+            k.StartTraining();
+            k.FalseStatisticPrint(2);
         }
     }
 }
