@@ -7,7 +7,7 @@ namespace Homework10
         static void Main()
         {
             var k = new Trainer();
-            k.LoadFromFile("task3/Formulas.txt");
+            k.LoadFromFile("Formulas.txt");
             k.StartTraining();
             k.StartTraining();
             k.FalseStatisticPrint(2);
