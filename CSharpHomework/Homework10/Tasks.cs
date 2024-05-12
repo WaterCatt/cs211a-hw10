@@ -4,6 +4,9 @@ namespace Homework10
 {
     internal class Tasks
     {
+        /// <summary>
+        /// Модуль "Зазубривание теории"
+        /// </summary>
         static void Task3()
         {
             WriteLine("Добро пожаловать в модуль \"Зазубривание теории\"!");
