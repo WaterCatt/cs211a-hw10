@@ -5,6 +5,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{C2B9C38E-0109-4C51-963D-D9E8825DAEE1}|Homework10\\Homework10.csproj|d:\\\u044F\u043F\\hw10\\cs211a-hw10\\csharphomework\\homework10\\tasks.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C2B9C38E-0109-4C51-963D-D9E8825DAEE1}|Homework10\\Homework10.csproj|solutionrelative:homework10\\tasks.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C2B9C38E-0109-4C51-963D-D9E8825DAEE1}|Homework10\\Homework10.csproj|d:\\\u044F\u043F\\hw10\\cs211a-hw10\\csharphomework\\homework10\\task3\\trainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C2B9C38E-0109-4C51-963D-D9E8825DAEE1}|Homework10\\Homework10.csproj|solutionrelative:homework10\\task3\\trainer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,8 +18,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Trainer.cs",
+              "DocumentMoniker": "D:\\\u042F\u041F\\HW10\\cs211a-hw10\\CSharpHomework\\Homework10\\task3\\Trainer.cs",
+              "RelativeDocumentMoniker": "Homework10\\task3\\Trainer.cs",
+              "ToolTip": "D:\\\u042F\u041F\\HW10\\cs211a-hw10\\CSharpHomework\\Homework10\\task3\\Trainer.cs",
+              "RelativeToolTip": "Homework10\\task3\\Trainer.cs",
+              "ViewState": "AQIAACoAAAAAAAAAAAAowDAAAAAZAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-12T08:51:31.117Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -24,7 +41,7 @@
               "RelativeDocumentMoniker": "Homework10\\Tasks.cs",
               "ToolTip": "D:\\\u042F\u041F\\HW10\\cs211a-hw10\\CSharpHomework\\Homework10\\Tasks.cs",
               "RelativeToolTip": "Homework10\\Tasks.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAiAAAA",
+              "ViewState": "AQIAABkAAAAAAAAAAAAgwDEAAABAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-05-04T12:35:46.153Z",
               "EditorCaption": ""

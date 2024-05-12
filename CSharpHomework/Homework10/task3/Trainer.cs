@@ -46,7 +46,7 @@ namespace Homework10
         /// </summary>
         private string[] TopicChoice()
         {
-            WriteLine("Доступные темы: ");
+            WriteLine("\nДоступные темы: ");
             foreach (var item in FormulaBank.Keys)
                 WriteLine($"{item} ");
             Write("\nВведите темы, формулы из которой нужно справшивать, через запятые: ");
@@ -76,7 +76,7 @@ namespace Homework10
         /// Выводит статистику неправильных ответов по темам
         /// </summary>
         /// <param name="cnt">Количество учитываемых тренировок</param>
-        public void FalseStatisticPrint(int cnt)
+        public void WrongAnswersStatistic(int cnt)
         {
             if ((cnt < 0) || (cnt > Trainingnum))
                 throw new ArgumentException("Некорректное число учитываемых тренировок.");
@@ -90,7 +90,6 @@ namespace Homework10
         /// </summary>
         public void StartTraining()
         {
-            WriteLine("Здравствуйте!\n");
             Trainingnum++;
             Statistics.Add(Trainingnum, new List<(string, Formula)>());
             var r = new Random();
