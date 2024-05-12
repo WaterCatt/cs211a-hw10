@@ -29,6 +29,11 @@ namespace Homework10
         public Trainer() { }
 
         /// <summary>
+        /// Список формул, на которые пользователь ответил неправильно
+        /// </summary>
+        private static List<Formula> WrongAnswers = new List<Formula>();
+
+        /// <summary>
         /// Добавляет одну формулу в банк формул в указанную тему
         /// </summary>
         /// <param name="formula">Формула</param>
@@ -46,11 +51,13 @@ namespace Homework10
         /// </summary>
         private string[] TopicChoice()
         {
-            WriteLine("Доступные темы: ");
+            WriteLine("\nДоступные темы: ");
             foreach (var item in FormulaBank.Keys)
                 WriteLine($"{item} ");
             Write("\nВведите темы, формулы из которой нужно справшивать, через запятые: ");
+            //массив тем для опроса
             string[] toparr = ReadLine().Split(',', StringSplitOptions.RemoveEmptyEntries).Select(x => x.ToLower().Trim()).ToArray();
+            //проверка наличия всех тем в массиве среди доступных тем
             if ((toparr.Any(s => !FormulaBank.ContainsKey(s))) || (toparr.Length == 0))
             {
                 WriteLine("Вы ввели некорректные темы. Попробуйте ещё раз...");
@@ -76,11 +83,11 @@ namespace Homework10
         /// Выводит статистику неправильных ответов по темам
         /// </summary>
         /// <param name="cnt">Количество учитываемых тренировок</param>
-        public void FalseStatisticPrint(int cnt)
+        public void WrongAnswersStatistic(int cnt)
         {
             if ((cnt < 0) || (cnt > Trainingnum))
                 throw new ArgumentException("Некорректное число учитываемых тренировок.");
-            WriteLine($"Статистика неправильных ответов по темам в {cnt} последних(-ней) тренировках(-ке):");
+            WriteLine($"\nСтатистика неправильных ответов по темам в {cnt} последних(-ней) тренировках(-ке):");
             var cort = Statistics.TakeLast(cnt).SelectMany(kv => kv.Value).Where(sf => sf.Item1 == "Неправильный ответ");
             foreach (var k in FormulaBank.Keys)
                 WriteLine($"Тема: {k}, кол-во неправильных ответов = {cort.Where(sf => sf.Item2.Topic.ToLower() == k).Count()}");
@@ -90,13 +97,27 @@ namespace Homework10
         /// </summary>
         public void StartTraining()
         {
-            WriteLine("Здравствуйте!\n");
             Trainingnum++;
             Statistics.Add(Trainingnum, new List<(string, Formula)>());
             var r = new Random();
-            var q = new Stack<Formula>();
-            var tc = TopicChoice();
-            var z = FormulaBank.Where(kv => tc.Contains(kv.Key)).SelectMany(kv => kv.Value).ToArray();
+            //Стек формул для опроса
+            var stack = new Stack<Formula>();
+            //Выбранные темы
+            var chosentopics = TopicChoice();
+            //Список всех формул в банке тех тем, которые выбрал пользователь
+            var formulalist = FormulaBank.Where(kv => chosentopics.Contains(kv.Key)).SelectMany(kv => kv.Value).ToList();
+            //Из списка формул, которые пользователь не ответил, формулы добавляются в список формул, пригодных для опроса для увеличения частоты их появления
+            foreach (var form in WrongAnswers)
+            {
+                if (chosentopics.Contains(form.Topic))
+                {
+                    formulalist.Add(form);
+                    formulalist.Add(form);
+                    formulalist.Add(form);
+                }
+            }
+            var formulaarr = formulalist.ToArray();
+
             Write("Сколько формул справшивать? ");
 
             var n = 0;
@@ -114,17 +135,18 @@ namespace Homework10
                 }
             }
             amount(ReadLine());
+            //Добавляем в стек для опроса случайные формулы из массива пригодных формул(массив из формул тех тем, которые выбрал пользователь + формулы, на которые пользователь до этого ответил неправильно(тех же тем))
             for (var i = 0; i < n; i++)
-                q.Push(z[r.Next(0, z.Length)]);
+                stack.Push(formulaarr[r.Next(0, formulaarr.Length)]);
 
             WriteLine();
             WriteLine("Тренировка началась!");
-            while (q.Count > 0)
+            while (stack.Count > 0)
             {
                 WriteLine("Следующая формула через 3 секунды. Готовьтесь!");
                 Thread.Sleep(3000);
                 WriteLine();
-                WriteLine($"Формула: {q.Peek().Name};");
+                WriteLine($"Формула: {stack.Peek().Name};");
                 Write("Осталось времени: ");
                 for (int i = 5; i > 0; i--)
                 {
@@ -132,16 +154,17 @@ namespace Homework10
                     Thread.Sleep(1000);
                 }
                 WriteLine();
-                Write($"Ответ: {q.Peek().Answer}; Дали ли Вы правильный ответ? (Введите да или что-то другое, если нет): ");
+                Write($"Ответ: {stack.Peek().Answer}; Дали ли Вы правильный ответ? (Введите да или что-то другое, если нет): ");
                 if (ReadLine().ToLower() == "да")
                 {
-                    Statistics[Trainingnum].Add(($"Правильный ответ", q.Peek()));
-                    q.Pop();
+                    Statistics[Trainingnum].Add(($"Правильный ответ", stack.Peek()));
+                    stack.Pop();
                     WriteLine("Молодец!");
                 }
                 else
                 {
-                    Statistics[Trainingnum].Add(($"Неправильный ответ", q.Peek()));
+                    WrongAnswers.Add(stack.Peek());
+                    Statistics[Trainingnum].Add(($"Неправильный ответ", stack.Peek()));
                     WriteLine("Жаль!");
                 }
                 WriteLine();
