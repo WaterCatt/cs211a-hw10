@@ -6,7 +6,7 @@ namespace Homework10
     {
         static void Main()
         {
-            //Protect_tasks.Protected_on();
+            Protect_tasks.Protected_on();
 
             while (true)
             {
