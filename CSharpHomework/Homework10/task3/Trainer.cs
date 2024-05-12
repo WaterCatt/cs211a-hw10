@@ -54,7 +54,7 @@ namespace Homework10
             WriteLine("\nДоступные темы: ");
             foreach (var item in FormulaBank.Keys)
                 WriteLine($"{item} ");
-            Write("\nВведите темы, формулы из которой нужно справшивать, через запятые: ");
+            Write("\nВведите темы, формулы из которой нужно спрашивать, через запятые: ");
             //массив тем для опроса
             string[] toparr = ReadLine().Split(',', StringSplitOptions.RemoveEmptyEntries).Select(x => x.ToLower().Trim()).ToArray();
             //проверка наличия всех тем в массиве среди доступных тем
@@ -118,7 +118,7 @@ namespace Homework10
             }
             var formulaarr = formulalist.ToArray();
 
-            Write("Сколько формул справшивать? ");
+            Write("Сколько формул спрашивать? ");
 
             var n = 0;
             void amount(string s)

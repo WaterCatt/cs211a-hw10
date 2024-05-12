@@ -31,3 +31,4 @@ E:\Учёба\CS\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\refint\H
 E:\Учёба\CS\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\Homework10.pdb
 E:\Учёба\CS\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\Homework10.genruntimeconfig.cache
 E:\Учёба\CS\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\ref\Homework10.dll
+D:\ЯП\HW10\cs211a-hw10\CSharpHomework\Homework10\bin\Debug\net8.0\task2\Bank.txt

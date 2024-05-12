@@ -42,9 +42,9 @@
         /// <param name="answer">Правильный ответ</param>
         public Formula(string name, string answer, string topic)
         {
-            this.name = name;
-            this.answer = answer;
-            this.topic = topic;
+            Name = name;
+            Answer = answer;
+            Topic = topic;
         }
 
         /// <summary>

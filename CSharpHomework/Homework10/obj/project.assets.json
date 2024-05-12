@@ -8,24 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\water\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\User\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Учёба\\CS\\cs211a-hw10\\CSharpHomework\\Homework10\\Homework10.csproj",
+      "projectUniqueName": "D:\\ЯП\\HW10\\cs211a-hw10\\CSharpHomework\\Homework10\\Homework10.csproj",
       "projectName": "Homework10",
-      "projectPath": "E:\\Учёба\\CS\\cs211a-hw10\\CSharpHomework\\Homework10\\Homework10.csproj",
-      "packagesPath": "C:\\Users\\water\\.nuget\\packages\\",
-      "outputPath": "E:\\Учёба\\CS\\cs211a-hw10\\CSharpHomework\\Homework10\\obj\\",
+      "projectPath": "D:\\ЯП\\HW10\\cs211a-hw10\\CSharpHomework\\Homework10\\Homework10.csproj",
+      "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+      "outputPath": "D:\\ЯП\\HW10\\cs211a-hw10\\CSharpHomework\\Homework10\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\water\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
