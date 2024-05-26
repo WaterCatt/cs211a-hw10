@@ -1,65 +1,108 @@
-﻿namespace Homework10
+﻿using Homework10.task1;
+
+namespace Homework10
 {
-    class Simulator
+    public class Simulator
     {
         /// <summary>
         /// список всех прямоугольников на плоскости
         /// </summary>
-        List<Rect> rects = new List<Rect>();
+        List<Shape> shapes = new List<Shape>();
+
+        /// <summary>
+        /// добавляет прямоугольник на плоскость
+        /// </summary>
+        public void AddShape(Shape shape)
+        {
+            shapes.Add(shape);
+        }
 
         /// <summary>
         /// класс симулятора плоскости
         /// </summary>
-        public Simulator(params Rect[] rects) 
+        public Simulator(params Shape[] shapes) 
         {
-            this.rects.AddRange(rects);
+            this.shapes.AddRange(shapes);
         }
 
         /// <summary>
         /// выводит все прямоугольники на плоскости
         /// </summary>
-        public void Write_All_Rects()
+        public void Write_All_Shapes()
         {
-            Console.WriteLine("Все прямоугольники на плоскости:");
-            foreach (Rect rect in rects)
-                Console.WriteLine(rect);
+            Console.WriteLine("Все фигуры на плоскости:");
+            foreach (Shape shape in shapes)
+                Console.WriteLine(shape);
         }
 
         /// <summary>
-        /// возвращает наиболее удаленный от центра координат прямоугольник
+        /// возвращает наиболее удаленную от центра координат фигуру
         /// </summary>
-        public Rect? Most_Remote()
+        public Shape? Most_Remote()
         {
-            if (rects.Count == 0)
+            if (shapes.Count == 0)
                 return null;
             var p_0 = new Point(0, 0);
 
             double dist = 0;
-            Rect res = new Rect(new Point(0, 0), new Point(0, 1), new Point(1, 0), new Point(1, 1));
-            foreach (Rect rect in rects)
+            int ind = 0;
+            int i = 0;
+            foreach (Shape shape in shapes)
             {
-                double min_dist = rect.p1.DistanceTo(p_0);
-                if (rect.p2.DistanceTo(p_0) < min_dist)
-                    min_dist = rect.p2.DistanceTo(p_0);
-                if (rect.p3.DistanceTo(p_0) < min_dist)
-                    min_dist = rect.p3.DistanceTo(p_0);
-                if (rect.p4.DistanceTo(p_0) < min_dist)
-                    min_dist = rect.p4.DistanceTo(p_0);
-                if (dist < min_dist)
+                double dist_now = p_0.DistanceTo(shape.Center);
+                if (dist < dist_now)
                 {
-                    res = rect;
-                    dist = min_dist;
+                    ind = i;
+                    dist = dist_now;
                 }
+                i++;
+            }
+            return shapes[ind];
+        }
+
+        /// <summary>
+        /// Получение массива фигур согласно заданному предикату
+        /// </summary>
+        public Shape[] Shapes_on_predicate(Predicate<Shape> pred)
+        {
+            return shapes.Where(x => pred(x)).ToArray();
+        }
+
+        /// <summary>
+        /// количество окружностей
+        /// </summary>
+        public int Count_Circle()
+        {
+            int res = 0;
+            foreach (Shape shape in shapes)
+            {
+                if (shape is Ellipse ellipse)
+                    if (ellipse.A ==  ellipse.B)
+                        res++;
             }
             return res;
         }
 
         /// <summary>
-        /// Получение массива прямоугольников согласно заданному предикату
+        /// прямоугольник с наименьшим периметром
         /// </summary>
-        public Rect[] Rects_on_predicate(Predicate<Rect> pred)
+        public Rect? Rect_with_min_P()
         {
-            return rects.Where(x => pred(x)).ToArray();
+            int res = -1;
+            double min_p = double.MaxValue;
+            int i = 0;
+            foreach (Shape shape in shapes)
+            {
+                if ((shape is Rect) && (shape.Perimeter < min_p))
+                {
+                    min_p = shape.Perimeter;
+                    res = i;
+                }
+                i++;
+            }
+            if (res == -1)
+                return null;
+            return (Rect)shapes[res];
         }
     }
 }

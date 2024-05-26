@@ -1,37 +1,12 @@
 ﻿using static System.Math;
+using Homework10.task1;
 
 namespace Homework10
 {
     /// <summary>
-    /// класс точки
-    /// </summary>
-    public class Point
-    {
-        public double x;
-        public double y;
-        public Point(double x, double y)
-        {
-            this.x = x; this.y = y;
-        }
-
-        public override string ToString()
-        {
-            return $"({x}, {y})";
-        }
-
-        /// <summary>
-        /// возвращает расcтояние до точки
-        /// </summary>
-        public double DistanceTo(Point p)
-        {
-            return Sqrt(Pow(x - p.x, 2) + Pow(y - p.y, 2));
-        }
-    }
-
-    /// <summary>
     /// класс прямоугольника
     /// </summary>
-    public class Rect
+    public class Rect : Shape
     {
         /// <summary>
         /// точка 1
@@ -54,15 +29,8 @@ namespace Homework10
         public Point p4 { get; private set; }
 
         /// <summary>
-        /// точка центр
-        /// </summary>
-        private Point p_center;
-
-        /// <summary>
         /// проверяет, образуют ли точки прямоугольник
         /// </summary>
-        /// <param name="arr_points"></param>
-        /// <returns></returns>
         private bool Is_Rect(params Point[] arr_points)
         {
             double eps = 0.001;
@@ -98,7 +66,7 @@ namespace Homework10
                 {
                     if (!Is_Rect(p1, p3, p2, p4))
                     {
-                        throw new Exception("неверные координаты вершин");
+                        throw new ArgumentException("неверные координаты вершин");
                     }
                     else
                         (p3, p2) = (p2, p3);
@@ -107,7 +75,7 @@ namespace Homework10
                     (p1, p2) = (p2, p1);
             }
 
-            p_center = new Point((p3.x + p1.x) / 2, (p3.y + p1.y) / 2);
+            Center = new Point((p3.x + p1.x) / 2, (p3.y + p1.y) / 2);
             this.p1 = p1;
             this.p2 = p2;
             this.p3 = p3;
@@ -116,45 +84,39 @@ namespace Homework10
         
         public override string ToString()
         {
-            return $"Rect[{p1}, {p2}, {p3}, {p4}]   Square={Square()}, Perimeter={Perimeter()}";
+            return $"Rect[{p1}, {p2}, {p3}, {p4}]   Square={Square}, Perimeter={Perimeter}";
         }
 
-        /// <summary>
-        /// вычисляет площадь
+        // <summary>
+        /// площадь
         /// </summary>
-        public double Square()
-        {
-            return p1.DistanceTo(p2) * p2.DistanceTo(p3);
-        }
+        public override double Square { get => Round(p1.DistanceTo(p2) * p2.DistanceTo(p3), 2); }
 
         /// <summary>
-        /// вычисляет периметр
+        /// периметр
         /// </summary>
-        public double Perimeter()
-        {
-            return (p1.DistanceTo(p2) + p2.DistanceTo(p3)) * 2;
-        }
+        public override double Perimeter { get => Round((p1.DistanceTo(p2) + p2.DistanceTo(p3)) * 2, 2); }
 
         /// <summary>
         /// поворачивает прямоугольник на angle градусов
         /// </summary>
-        public void Rotate(double angle)
+        public override void Rotate(double angle)
         {
             double scos = Cos(angle * PI / 180);
             double ssin = Sin(angle * PI / 180);
             var arr_p = new Point[] { p1, p2, p3, p4 };
             foreach (var p in arr_p)
             {
-                (p.x, p.y) = (p_center.x + (p.x - p_center.x) * scos - (p.y - p_center.y) * ssin, p_center.y + (p.y - p_center.y) * scos + (p.x - p_center.x) * ssin);
+                (p.x, p.y) = (Center.x + (p.x - Center.x) * scos - (p.y - Center.y) * ssin, Center.y + (p.y - Center.y) * scos + (p.x - Center.x) * ssin);
             }
         }
 
         /// <summary>
         /// сдвиг прямоугольника
         /// </summary>
-        public void Shift(double x, double y)
+        public override void Shift(double x, double y)
         {
-            var arr_p = new Point[] { p1,  p2, p3, p4, p_center };
+            var arr_p = new Point[] { p1,  p2, p3, p4, Center };
             foreach (var p in arr_p)
             {
                 p.x += x;
@@ -165,15 +127,15 @@ namespace Homework10
         /// <summary>
         /// увеличивает ширину и высоту прямоугольника на заданные коэффициенты
         /// </summary>
-        public void Ratio(double k_width, double k_height)
+        public override void Ratio(double k_width, double k_height)
         {
             if ((k_width <= 0) || (k_height <= 0))
                 throw new Exception("error of ratio");
-            var arr_p = new Point[] { p1, p2, p3, p4, p_center };
+            var arr_p = new Point[] { p1, p2, p3, p4, Center };
             foreach (var p in arr_p)
             {
-                p.x = p_center.x + (p.x - p_center.x) * k_width;
-                p.y = p_center.y + (p.y - p_center.y) * k_height;
+                p.x = Center.x + (p.x - Center.x) * k_width;
+                p.y = Center.y + (p.y - Center.y) * k_height;
             }
         }
     }
