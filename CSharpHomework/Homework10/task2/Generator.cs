@@ -46,14 +46,15 @@
             var lst = File.ReadAllLines(fname).Select(x => x.Split('|', StringSplitOptions.RemoveEmptyEntries)).Where(x => x.Length == 3);
             foreach (var exercise in lst)
             {
-                ExerciseList.Add(new Exercise(exercise[0], exercise[1], exercise[2]));
+                var task = exercise[0].Split('~', StringSplitOptions.RemoveEmptyEntries);
+                ExerciseList.Add(new Exercise(task.First(), task.Skip(1).ToList(), exercise[1], exercise[2]));
             }
         }
         /// <summary>
         /// Метод сохранения вариантов в разные файлы
         /// </summary>
         /// <param name="fname">Имя файла</param>
-        public void SaveVariants(string fname = "Variant")
+        public void SaveVariants(string fname = "Variant", bool shuffle = false)
         {
             for (var i = 0; i < Variant_list.Count; i++)
             {
@@ -66,7 +67,9 @@
                         var j = 1;
                         foreach (var exercise in Variant_list[i])
                         {
-                            sw1.WriteLine($"№{j}. {exercise.Task}\nОтвет: {exercise.Answer}");
+                            if (shuffle)
+                                exercise.Shuffle();
+                            sw1.WriteLine($"№{j}. {exercise.Task}{(exercise.Answ_Opt.Count == 4 ? $"\nВарианты ответов:\n{string.Join('\n', exercise.Answ_Opt)}" : "")}\nОтвет: {exercise.Answer}");
                             sw2.WriteLine($"№{j++}. {exercise.Get_Hint()}");
                         }
                     }

@@ -32,3 +32,20 @@ E:\Учёба\CS\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\Homework
 E:\Учёба\CS\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\Homework10.genruntimeconfig.cache
 E:\Учёба\CS\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\ref\Homework10.dll
 D:\ЯП\HW10\cs211a-hw10\CSharpHomework\Homework10\bin\Debug\net8.0\task2\Bank.txt
+C:\Program C#\labs\Git\cs211a-hw10\CSharpHomework\Homework10\bin\Debug\net8.0\Homework10.exe
+C:\Program C#\labs\Git\cs211a-hw10\CSharpHomework\Homework10\bin\Debug\net8.0\task2\Bank.txt
+C:\Program C#\labs\Git\cs211a-hw10\CSharpHomework\Homework10\bin\Debug\net8.0\task3\Formulas.txt
+C:\Program C#\labs\Git\cs211a-hw10\CSharpHomework\Homework10\bin\Debug\net8.0\Homework10.deps.json
+C:\Program C#\labs\Git\cs211a-hw10\CSharpHomework\Homework10\bin\Debug\net8.0\Homework10.runtimeconfig.json
+C:\Program C#\labs\Git\cs211a-hw10\CSharpHomework\Homework10\bin\Debug\net8.0\Homework10.dll
+C:\Program C#\labs\Git\cs211a-hw10\CSharpHomework\Homework10\bin\Debug\net8.0\Homework10.pdb
+C:\Program C#\labs\Git\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\Homework10.GeneratedMSBuildEditorConfig.editorconfig
+C:\Program C#\labs\Git\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\Homework10.AssemblyInfoInputs.cache
+C:\Program C#\labs\Git\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\Homework10.AssemblyInfo.cs
+C:\Program C#\labs\Git\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\Homework10.csproj.CoreCompileInputs.cache
+C:\Program C#\labs\Git\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\Homework10.sourcelink.json
+C:\Program C#\labs\Git\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\Homework10.dll
+C:\Program C#\labs\Git\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\refint\Homework10.dll
+C:\Program C#\labs\Git\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\Homework10.pdb
+C:\Program C#\labs\Git\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\Homework10.genruntimeconfig.cache
+C:\Program C#\labs\Git\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\ref\Homework10.dll
