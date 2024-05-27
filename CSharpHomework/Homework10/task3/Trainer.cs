@@ -14,14 +14,14 @@ namespace Homework10
         private static int Trainingnum = 0;
 
         /// <summary>
-        /// Банк формул
+        /// Банк вопросов
         /// </summary>
-        private Dictionary<string, List<Formula>> FormulaBank = new Dictionary<string, List<Formula>>();
+        private Dictionary<string, List<Question>> QuestionBank = new Dictionary<string, List<Question>>();
 
         /// <summary>
         /// Статистика ответов
         /// </summary>
-        private Dictionary<int, List<(string, Formula)>> Statistics = new Dictionary<int, List<(string, Formula)>>();
+        private Dictionary<int, List<(string, Question)>> Statistics = new Dictionary<int, List<(string, Question)>>();
 
         /// <summary>
         /// Конструктор тренажёра
@@ -29,21 +29,21 @@ namespace Homework10
         public Trainer() { }
 
         /// <summary>
-        /// Список формул, на которые пользователь ответил неправильно
+        /// Список вопросов, на которые пользователь ответил неправильно
         /// </summary>
-        private static List<Formula> WrongAnswers = new List<Formula>();
+        private static List<Question> WrongAnswers = new List<Question>();
 
         /// <summary>
-        /// Добавляет одну формулу в банк формул в указанную тему
+        /// Добавляет один вопрос(формула или теорема) в банк вопросов в указанную тему
         /// </summary>
-        /// <param name="formula">Формула</param>
-        public void AddFormula(Formula formula)
+        /// <param name="question">Вопрос</param>
+        public void AddQuestion(Question question)
         {
-            var top = formula.Topic.ToLower();
-            if (FormulaBank.ContainsKey(top))
-                FormulaBank[top].Add(formula);
+            var top = question.Topic.ToLower();
+            if (QuestionBank.ContainsKey(top))
+                QuestionBank[top].Add(question);
             else
-                FormulaBank.Add(top, new List<Formula> { formula });
+                QuestionBank.Add(top, new List<Question> { question });
         }
 
         /// <summary>
@@ -52,13 +52,13 @@ namespace Homework10
         private string[] TopicChoice()
         {
             WriteLine("\nДоступные темы: ");
-            foreach (var item in FormulaBank.Keys)
+            foreach (var item in QuestionBank.Keys)
                 WriteLine($"{item} ");
-            Write("\nВведите темы, формулы из которой нужно справшивать, через запятые: ");
+            Write("\nВведите темы, формулы и теоремы из которой нужно спрашивать, через запятые: ");
             //массив тем для опроса
             string[] toparr = ReadLine().Split(',', StringSplitOptions.RemoveEmptyEntries).Select(x => x.ToLower().Trim()).ToArray();
             //проверка наличия всех тем в массиве среди доступных тем
-            if ((toparr.Any(s => !FormulaBank.ContainsKey(s))) || (toparr.Length == 0))
+            if ((toparr.Any(s => !QuestionBank.ContainsKey(s))) || (toparr.Length == 0))
             {
                 WriteLine("Вы ввели некорректные темы. Попробуйте ещё раз...");
                 return TopicChoice();
@@ -67,17 +67,30 @@ namespace Homework10
         }
 
         /// <summary>
-        /// Загружает формулы в банк формул из файла
+        /// Загружает формулы и теоремы в банк вопросов из файла
         /// </summary>
         /// <param name="filename">Имя файла</param>
         public void LoadFromFile(string filename)
         {
-            foreach (var s in File.ReadLines(filename).Skip(1))
+            foreach (var s in File.ReadLines(filename))
             {
-                var form = s.Split(',', StringSplitOptions.RemoveEmptyEntries);
-                AddFormula(new Formula(form[1], form[2], form[0]));
+                var ques = s.Split('_', StringSplitOptions.RemoveEmptyEntries);
+                if (ques[0] == "F")
+                    AddQuestion(new Formula(ques[1], ques[2], ques[3]));
+                else
+                    AddQuestion(new Theorem(ques[1], ques[2], ques[3], ques[4]));
             }
         }
+
+        /// <summary>
+        /// Выводит формулу с самой короткой записью
+        /// </summary>
+        public void ShortestFormula() => WriteLine($"Формула с кратчайшей записью:\n{QuestionBank.Values.SelectMany(x => x.Where(c => (c is Formula))).OrderBy(x => (x as Formula).Answer.Length).First()}");
+
+        /// <summary>
+        /// Выводит теорему с самым длинным док-вом
+        /// </summary>
+        public void LongestProofTheorem() => WriteLine($"Теорема с самым длинным док-вом:\n{QuestionBank.Values.SelectMany(x => x.Where(c => (c is Theorem))).OrderByDescending(x => (x as Theorem).Proof.Length).First()}");
 
         /// <summary>
         /// Выводит статистику неправильных ответов по темам
@@ -89,36 +102,37 @@ namespace Homework10
                 throw new ArgumentException("Некорректное число учитываемых тренировок.");
             WriteLine($"\nСтатистика неправильных ответов по темам в {cnt} последних(-ней) тренировках(-ке):");
             var cort = Statistics.TakeLast(cnt).SelectMany(kv => kv.Value).Where(sf => sf.Item1 == "Неправильный ответ");
-            foreach (var k in FormulaBank.Keys)
+            foreach (var k in QuestionBank.Keys)
                 WriteLine($"Тема: {k}, кол-во неправильных ответов = {cort.Where(sf => sf.Item2.Topic.ToLower() == k).Count()}");
         }
+
         /// <summary>
         /// Начинает тренировку
         /// </summary>
         public void StartTraining()
         {
             Trainingnum++;
-            Statistics.Add(Trainingnum, new List<(string, Formula)>());
+            Statistics.Add(Trainingnum, new List<(string, Question)>());
             var r = new Random();
-            //Стек формул для опроса
-            var stack = new Stack<Formula>();
+            //Стек вопросов для опроса
+            var stack = new Stack<Question>();
             //Выбранные темы
             var chosentopics = TopicChoice();
-            //Список всех формул в банке тех тем, которые выбрал пользователь
-            var formulalist = FormulaBank.Where(kv => chosentopics.Contains(kv.Key)).SelectMany(kv => kv.Value).ToList();
-            //Из списка формул, которые пользователь не ответил, формулы добавляются в список формул, пригодных для опроса для увеличения частоты их появления
-            foreach (var form in WrongAnswers)
+            //Список всех вопросов в банке тех тем, которые выбрал пользователь
+            var qlist = QuestionBank.Where(kv => chosentopics.Contains(kv.Key)).SelectMany(kv => kv.Value).ToList();
+            //Из списка вопросов, которые пользователь не ответил, вопросы добавляются в список вопросов, пригодных для опроса для увеличения частоты их появления
+            foreach (var q in WrongAnswers)
             {
-                if (chosentopics.Contains(form.Topic))
+                if (chosentopics.Contains(q.Topic))
                 {
-                    formulalist.Add(form);
-                    formulalist.Add(form);
-                    formulalist.Add(form);
+                    qlist.Add(q);
+                    qlist.Add(q);
+                    qlist.Add(q);
                 }
             }
-            var formulaarr = formulalist.ToArray();
+            var qarr = qlist.ToArray();
 
-            Write("Сколько формул справшивать? ");
+            Write("Сколько вопросов спрашивать? ");
 
             var n = 0;
             void amount(string s)
@@ -135,39 +149,90 @@ namespace Homework10
                 }
             }
             amount(ReadLine());
-            //Добавляем в стек для опроса случайные формулы из массива пригодных формул(массив из формул тех тем, которые выбрал пользователь + формулы, на которые пользователь до этого ответил неправильно(тех же тем))
+            //Добавляем в стек для опроса случайные вопросы из массива пригодных вопросов(массив из вопросов тех тем, которые выбрал пользователь + вопросы, на которые пользователь до этого ответил неправильно(тех же тем))
             for (var i = 0; i < n; i++)
-                stack.Push(formulaarr[r.Next(0, formulaarr.Length)]);
+                stack.Push(qarr[r.Next(0, qarr.Length)]);
 
             WriteLine();
             WriteLine("Тренировка началась!");
             while (stack.Count > 0)
             {
-                WriteLine("Следующая формула через 3 секунды. Готовьтесь!");
-                Thread.Sleep(3000);
-                WriteLine();
-                WriteLine($"Формула: {stack.Peek().Name};");
-                Write("Осталось времени: ");
-                for (int i = 5; i > 0; i--)
+                if (stack.Peek() is Formula)
                 {
-                    Write($"{i} ");
-                    Thread.Sleep(1000);
-                }
-                WriteLine();
-                Write($"Ответ: {stack.Peek().Answer}; Дали ли Вы правильный ответ? (Введите да или что-то другое, если нет): ");
-                if (ReadLine().ToLower() == "да")
-                {
-                    Statistics[Trainingnum].Add(($"Правильный ответ", stack.Peek()));
-                    stack.Pop();
-                    WriteLine("Молодец!");
+                    WriteLine("Следующая формула через 3 секунды. Готовьтесь!");
+                    Thread.Sleep(3000);
+                    WriteLine();
+                    WriteLine($"Формула: {(stack.Peek() as Formula).Name};");
+                    Write("Осталось времени: ");
+                    for (int i = 5; i > 0; i--)
+                    {
+                        Write($"{i} ");
+                        Thread.Sleep(1000);
+                    }
+                    WriteLine();
+                    Write($"Ответ: {(stack.Peek() as Formula).Answer}; Дали ли Вы правильный ответ? (Введите да или что-то другое, если нет): ");
+                    if (ReadLine().ToLower() == "да")
+                    {
+                        Statistics[Trainingnum].Add(($"Правильный ответ", stack.Peek()));
+                        stack.Pop();
+                        WriteLine("Молодец!");
+                    }
+                    else
+                    {
+                        WrongAnswers.Add(stack.Peek());
+                        Statistics[Trainingnum].Add(($"Неправильный ответ", stack.Peek()));
+                        WriteLine("Жаль!");
+                    }
+                    WriteLine();
                 }
                 else
                 {
-                    WrongAnswers.Add(stack.Peek());
-                    Statistics[Trainingnum].Add(($"Неправильный ответ", stack.Peek()));
-                    WriteLine("Жаль!");
+                    var t = stack.Peek() as Theorem;
+                    WriteLine("Следующая теорема через 3 секунды. Готовьтесь!");
+                    Thread.Sleep(3000);
+                    WriteLine();
+                    WriteLine($"Допишите у себя заключение теоремы:\n{t.Condition}...");
+                    Write("Осталось времени: ");
+                    for (int i = 10; i > 0; i--)
+                    {
+                        Write($"{i} ");
+                        Thread.Sleep(1000);
+                    }
+                    WriteLine();
+                    Write($"Заключение теоремы: {t.Conclusion}; Дали ли Вы правильный ответ? (Введите да или что-то другое, если нет): ");
+                    if (ReadLine().ToLower() == "да")
+                        WriteLine("Молодец!");
+                    else
+                    {
+                        WrongAnswers.Add(t);
+                        Statistics[Trainingnum].Add(($"Неправильный ответ", t));
+                        WriteLine("Жаль!");
+                        continue;
+                    }
+                    WriteLine("\nНапишите у себя доказательство теоремы");
+                    Write("Осталось времени: ");
+                    for (int i = 20; i > 0; i--)
+                    {
+                        Write($"{i} ");
+                        Thread.Sleep(1000);
+                    }
+                    WriteLine();
+                    WriteLine($"Док-во: {t.Proof}");
+                    Write("Дали ли Вы правильный ответ? (Введите да или что-то другое, если нет): ");
+                    if (ReadLine().ToLower() == "да")
+                    {
+                        Statistics[Trainingnum].Add(($"Правильный ответ", t));
+                        stack.Pop();
+                        WriteLine("Молодец!");
+                    }
+                    else
+                    {
+                        WrongAnswers.Add(t);
+                        Statistics[Trainingnum].Add(($"Неправильный ответ", t));
+                        WriteLine("Жаль!");
+                    }
+                    WriteLine();
                 }
-                WriteLine();
             }
             WriteLine("Вы - большой молодец!");
         }
