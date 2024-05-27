@@ -112,15 +112,15 @@ namespace Homework10
         {
             WriteLine("Добро пожаловать в модуль \"Зазубривание теории\"!");
             var trainer = new Trainer();
-            trainer.LoadFromFile("task3/Formulas.txt");
+            trainer.LoadFromFile("task3/Questions.txt");
             while (true)
             {
-                WriteLine("\nДоступные команды:\nНачать тренировку\nСтатистика неправильных ответов\nВыход\n");
-                Write("Введите команду: ");
+                WriteLine("\nДоступные команды:\n1. Начать тренировку\n2. Статистика неправильных ответов\n3. Вывести формулу с самой короткой записью\n4. Вывести теорему с самым длинным док-вом\n5. Выход\n");
+                Write("Введите номер команды: ");
                 var s = ReadLine();
-                if (s.ToLower() == "начать тренировку")
+                if (s.ToLower() == "1")
                     trainer.StartTraining();
-                else if (s.ToLower() == "статистика неправильных ответов")
+                else if (s.ToLower() == "2")
                 {
                     Write("Сколько тренировок учитывать? ");
                     var cnt = 0;
@@ -147,7 +147,11 @@ namespace Homework10
                         WriteLine($"Ошибка вывода статистики неправильных ответов: {e.Message}");
                     }
                 }
-                else if (s.ToLower() == "выход")
+                else if (s.ToLower() == "3")
+                    trainer.ShortestFormula();
+                else if (s.ToLower() == "4")
+                    trainer.LongestProofTheorem();
+                else if (s.ToLower() == "5")
                     return;
                 else
                 {

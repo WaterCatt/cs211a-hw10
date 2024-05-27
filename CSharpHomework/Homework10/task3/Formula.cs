@@ -3,7 +3,7 @@
     /// <summary>
     /// Класс формула
     /// </summary>
-    class Formula
+    class Formula : Question
     {
         /// <summary>
         /// Название формулы
@@ -25,26 +25,16 @@
         /// </summary>
         public string Answer { get => answer; set => answer = string.IsNullOrWhiteSpace(value) ? "Empty" : value; }
 
-        /// <summary>
-        /// Тема
-        /// </summary>
-        private string topic;
-
-        /// <summary>
-        /// Тема
-        /// </summary>
-        public string Topic { get => topic; set => topic = string.IsNullOrWhiteSpace(value) ? "Empty" : value; }
 
         /// <summary>
         /// Конструктор формулы
         /// </summary>
         /// <param name="name">Название формулы</param>
         /// <param name="answer">Правильный ответ</param>
-        public Formula(string name, string answer, string topic)
+        public Formula(string topic, string name, string answer) : base(topic)
         {
-            Name = name;
-            Answer = answer;
-            Topic = topic;
+            this.name = name;
+            this.answer = answer;
         }
 
         /// <summary>

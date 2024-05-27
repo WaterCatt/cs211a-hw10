@@ -49,3 +49,4 @@ C:\Program C#\labs\Git\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\re
 C:\Program C#\labs\Git\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\Homework10.pdb
 C:\Program C#\labs\Git\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\Homework10.genruntimeconfig.cache
 C:\Program C#\labs\Git\cs211a-hw10\CSharpHomework\Homework10\obj\Debug\net8.0\ref\Homework10.dll
+C:\Program C#\labs\Git\cs211a-hw10\CSharpHomework\Homework10\bin\Debug\net8.0\task3\Questions.txt
